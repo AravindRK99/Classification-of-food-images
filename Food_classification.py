@@ -141,36 +141,6 @@ plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper right')
 plt.show()
 
-# Commented out IPython magic to ensure Python compatibility.
-# Predicting images with the trained model using keras.preprocessing 
-from keras.preprocessing import image 
-import numpy as np
-import matplotlib.pyplot as plt 
-# %matplotlib inline 
-test_image = image.load_img("/content/gdrive/My Drive/Colab Notebooks/Project Dataset/Prediction_test/Dumpling.jpg",  target_size = (256, 256))
-test_image = image.img_to_array(test_image)
-test_image = np.expand_dims(test_image, axis=0)
-array = classifier.predict(test_image)
-classes = training_set.class_indices
-print(classes)
-result = array[0]
-print(result)
-answer = np.argmax(result)
-print(answer)
-if answer == 0:
-  print("The image resembles a cupcake!")
-elif answer == 1:
-  print("The image resembles dumplings!")
-elif answer == 2:
-  print("The image resembles french fries!")
-elif answer == 3:
-  print("The image resembles fried rice!")
-elif answer == 4:
-  print("The image resembles a pizza!")
-
-from keras.models import load_model
-classifier.save('MINI_PROJECT_MODEL_FINAL.h5')
-# Creates a HDF5 file 'my_model.h5'
 
 # Install the PyDrive wrapper & import libraries.
 # This only needs to be done once in a notebook.
@@ -194,44 +164,3 @@ uploaded.Upload()
 print('Uploaded file with ID {}'.format(uploaded.get('id')))
 
 
-#The below code is a part of the trained model file and can be found there.
-
-"""#Loading the model and testing 
-from keras.models import load_model
-from keras.preprocessing import image 
-import numpy as np
-
-classifier = load_model('/content/gdrive/My Drive/MINI_PROJECT_MODEL_FINAL.h5')
-classifier.compile(optimizer ='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-
-classifier.summary()
-
-def pred(path):
-  test = image.load_img(path, target_size =(256,256))
-  test = image.img_to_array(test)
-  test = np.expand_dims(test, axis=0)
-  result = classifier.predict(test)
-  print(result)
-  if result[0][0] == 1:
-    print("CUPCAKES!")
-  elif result[0][1] == 1:
-    print("DUMPLINGS")
-  elif result[0][2] == 1:
-    print("FRENCH FRIES")
-  elif result[0][3] == 1:
-    print("FRIED RICE")
-  else:
-    print("PIZZA!")
-
-pred('/content/gdrive/My Drive/Colab Notebooks/Project Dataset/Prediction_test/Dumpling.jpg')
-
-def demo():
-    flag=1
-    while flag:
-        print("Input File Path of Image: ")
-        filepath=input()
-        pred(filepath)
-        print("Enter 0 to Quit, else 1")
-        flag=input()
-
-demo()"""
